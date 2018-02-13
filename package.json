@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/get-text",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get your Views text into a JSON for ready for I18n",
   "main": "index.js",
   "license": "BSD-3-Clause",

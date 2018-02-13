@@ -20,17 +20,18 @@ function getI18n(rtext) {
     .filter(isntProp)
 }
 
-glob([path.join(process.cwd(), '**', '*.view')], {
-  bashNative: ['linux'],
-  cwd: __dirname,
-}).then(list => {
-  let i18n = {}
+module.exports = function(root) {
+  glob([path.join(root, '**', '*.view')], {
+    bashNative: ['linux'],
+  }).then(list => {
+    let i18n = {}
 
-  uniq(
-    flatten(list.map(file => getI18n(fs.readFileSync(file, 'utf-8')))).sort()
-  ).forEach(text => {
-    i18n[text] = text
+    uniq(
+      flatten(list.map(file => getI18n(fs.readFileSync(file, 'utf-8')))).sort()
+    ).forEach(text => {
+      i18n[text] = text
+    })
+
+    console.log(JSON.stringify(i18n, null, '  '))
   })
-
-  console.log(JSON.stringify(i18n, null, ' '))
-})
+}
