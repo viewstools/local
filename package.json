@@ -1,0 +1,16 @@
+{
+  "name": "@viewstools/get-text",
+  "version": "1.0.0",
+  "description": "Get your Views text into a JSON for ready for I18n",
+  "main": "index.js",
+  "license": "BSD-3-Clause",
+  "repository": "https://github.com/viewstools/get-text",
+  "dependencies": {
+    "fast-glob": "^2.0.3",
+    "flatten": "^1.0.2",
+    "uniq": "^1.0.1"
+  },
+  "bin": {
+    "views-get-text": "./cli.js"
+  }
+}
