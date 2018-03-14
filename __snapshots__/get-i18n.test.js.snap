@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#getI18n 1`] = `
+Object {
+  "text <name gets a default value": "gets a default value",
+  "text Assignment:": "Assignment:",
+}
+`;
+
+exports[`#getI18n 2`] = `
+Object {
+  "text Assignment:": "Assignment:",
+  "text Tarea:": "Tarea:",
+}
+`;
