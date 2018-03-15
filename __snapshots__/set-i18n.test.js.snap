@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#setI18n 1`] = `
+"Read Vertical
+Text
+color #323232
+fontFamily SlatePro
+fontSize 20
+fontWeight 600
+text Assignment:
+
+Name Text
+text <name sets a default value
+
+CaptureText
+placeholder hi"
+`;
