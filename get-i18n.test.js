@@ -9,7 +9,10 @@ fontWeight 600
 text Assignment:
 
 Name Text
-text <name gets a default value`
+text <name gets a default value
+
+CaptureText
+placeholder hi`
 
 const READ_VIEW_THAT_ALREADY_HAS_TRANSLATIONS = `Read Vertical
 Text
