@@ -1,32 +1,63 @@
-const isText = line => /^(text|placeholder) /.test(line)
+const REPLACE = /^(?:text|placeholder)\s(?:<[^\s]*\s)?(.*)/;
+const GET_TEXT_AND_SLOT = /\/(text|placeholder)\s(<[^\s]*\s)?/;
 
-const withoutSlot = line => line.replace(/^(\<.+?)\s/, '')
+const isText = line => /^(text|placeholder)/.test(line);
+const isBlock = line => /^[A-Z]/.test(line);
+const replaceText = (line, newText) =>
+  line.replace(line.match(REPLACE)[1], newText);
+const getPath = key => {
+  const match = key.match(/([^\s]+)\s/);
+  return match[1].split('/');
+};
+const getStartIndex = (path, lines) => {
+  let startIndex = 0;
+  path.forEach((name, index) => {
+    for (let i = startIndex; i < lines.length; i++) {
+      if (isBlock(name) && new RegExp(name).test(lines[i])) {
+        startIndex = i + 1;
+        break;
+      }
+    }
+  });
+  return startIndex;
+};
 
-const isBlock = line => /^[A-Z]/.test(line)
-const setBlock = line => line.split(' ')[0]
-const setText = line => line.replace(/^(text|placeholder) /, '')
+function setI18n({ defaultLanguage = 'en', source, view, translations }) {
+  const lines = source
+    .replace(/\r\n/g, '\n')
+    .split('\n')
+    .map(line => line.trim());
+  const languages = Object.keys(translations).filter(
+    lang => lang !== defaultLanguage
+  );
+  const keys = Object.keys(translations[defaultLanguage]);
 
-function setI18n({ source, view, translations }) {
-  const text = source.replace(/\r\n/g, '\n')
-  const lines = text.split('\n').map(line => line.trim())
+  keys.forEach(key => {
+    const startIndex = getStartIndex(getPath(key), lines);
+    languages.forEach(lang => {
+      let added = false;
+      let i = startIndex;
+      const bits = key.match(GET_TEXT_AND_SLOT);
+      const whenLine = `when <${lang}`;
+      const textLine = `${bits[1]} ${bits[2] || ''}${translations[lang][key]}`;
 
-  // // TODO refactor so that we can extract other languages
-  // const obj = {}
+      while (!added) {
+        const isEndOfBlock = lines[i] === '' || isBlock(lines[i]);
+        const isEndOfContent = i === lines.length - 1;
+        const isWhenLine = new RegExp(whenLine).test(lines[i]);
 
-  // let currentBlock = null
+        if (isWhenLine || isEndOfBlock || isEndOfContent) {
+          isWhenLine && lines.splice(i, 2);
+          const index = isEndOfContent ? i + 1 : i;
+          lines.splice(index, 0, whenLine, textLine);
+          added = true;
+          return;
+        }
+        i++;
+      }
+    });
+  });
 
-  // lines.forEach(line => {
-  //   if (isBlock(line)) {
-  //   }
-
-  //   if (isText(line)) {
-  //     const text = setText(line)
-
-  //     // TODO add path to translation View/Block Name or Type/line
-  //     obj[line] = withoutSlot(text)
-  //   }
-  // })
-
-  return lines.join('\n')
+  return lines.join('\n');
 }
-module.exports = setI18n
+module.exports = setI18n;
