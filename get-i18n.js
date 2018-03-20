@@ -17,13 +17,14 @@ function getI18n(view, rtext) {
 
   lines.forEach(line => {
     if (isBlock(line)) {
+      currentBlock = line;
     }
 
     if (isText(line)) {
       const text = getText(line)
 
       // TODO add path to translation View/Block Name or Type/line
-      obj[line] = withoutSlot(text)
+      obj[`${view} / ${currentBlock} / ${line}`] = withoutSlot(text)
     }
   })
 
