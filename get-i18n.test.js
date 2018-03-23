@@ -28,6 +28,8 @@ NameLabel Text
 text Name:
 when <es
 text Nombre:
+when <deCH
+text Namen:
 `
 
 test('#getI18n', () => {

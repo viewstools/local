@@ -19,7 +19,7 @@ function getI18n(view, rtext) {
   let currentView = null
   const regexList = LOCAL_SCOPES.map(shortcode => new RegExp(`^when <${shortcode}`) );
   let isTranslation = null;
-  let lineKey;
+  let textKey;
 
   lines.forEach((line, index) => {
     if (isBlock(line)) {
@@ -29,15 +29,15 @@ function getI18n(view, rtext) {
       const text = getText(line)
       isTranslation = regexList.some(regex => regex.test(lines[index-1]));
       if(!isTranslation){
-        lineKey = line;
-        defaultLanguage[`${view}/${currentBlock}/${lineKey}`] = withoutSlot(text)
+        textKey = line;
+        defaultLanguage[`${view}/${currentBlock}/${textKey}`] = withoutSlot(text)
         obj[`default`] = defaultLanguage;
       } else {
         const langShortCode = lines[index-1].split('<')[1];
         if(!obj.hasOwnProperty(langShortCode)){
           obj[langShortCode] = {};
         }
-        obj[langShortCode][`${view}/${currentBlock}/${lineKey}`] = withoutSlot(text)
+        obj[langShortCode][`${view}/${currentBlock}/${textKey}`] = withoutSlot(text)
       }
     }
   })

@@ -12,6 +12,9 @@ Object {
 
 exports[`#getI18n 2`] = `
 Object {
+  "deCH": Object {
+    "Read/NameLabel Text/text Name:": "Namen:",
+  },
   "default": Object {
     "Read/NameLabel Text/text Name:": "Name:",
     "Read/Text/text Assignment:": "Assignment:",
