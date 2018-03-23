@@ -22,7 +22,13 @@ fontSize 20
 fontWeight 600
 text Assignment:
 when <es
-text Tarea:`
+text Tarea:
+
+NameLabel Text
+text Name:
+when <es
+text Nombre:
+`
 
 test('#getI18n', () => {
   expect(getI18n('Read', READ_VIEW)).toMatchSnapshot()

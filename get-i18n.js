@@ -6,25 +6,39 @@ const isBlock = line => /^[A-Z]/.test(line)
 const getBlock = line => line.split(' ')[0]
 const getText = line => line.replace(/^(text|placeholder) /, '')
 
+const locales = require('i18n-locales')
+const LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
+
 function getI18n(view, rtext) {
   const text = rtext.replace(/\r\n/g, '\n')
   const lines = text.split('\n').map(line => line.trim())
 
-  // TODO refactor so that we can extract other languages
-  const obj = {}
-
+  const obj = {};
+  const defaultLanguage = {};
   let currentBlock = null
+  let currentView = null
+  const regexList = LOCAL_SCOPES.map(shortcode => new RegExp(`^when <${shortcode}`) );
+  let isTranslation = null;
+  let lineKey;
 
-  lines.forEach(line => {
+  lines.forEach((line, index) => {
     if (isBlock(line)) {
       currentBlock = line;
     }
-
     if (isText(line)) {
       const text = getText(line)
-
-      // TODO add path to translation View/Block Name or Type/line
-      obj[`${view} / ${currentBlock} / ${line}`] = withoutSlot(text)
+      isTranslation = regexList.some(regex => regex.test(lines[index-1]));
+      if(!isTranslation){
+        lineKey = line;
+        defaultLanguage[`${view}/${currentBlock}/${lineKey}`] = withoutSlot(text)
+        obj[`default`] = defaultLanguage;
+      } else {
+        const langShortCode = lines[index-1].split('<')[1];
+        if(!obj.hasOwnProperty(langShortCode)){
+          obj[langShortCode] = {};
+        }
+        obj[langShortCode][`${view}/${currentBlock}/${lineKey}`] = withoutSlot(text)
+      }
     }
   })
 
