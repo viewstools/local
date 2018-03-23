@@ -31,7 +31,6 @@ function getI18n(view, rtext) {
       if(!isTranslation){
         textKey = line;
         defaultLanguage[`${view}/${currentBlock}/${textKey}`] = withoutSlot(text)
-        obj[`default`] = defaultLanguage;
       } else {
         const langShortCode = lines[index-1].split('<')[1];
         if(!obj.hasOwnProperty(langShortCode)){
@@ -40,6 +39,7 @@ function getI18n(view, rtext) {
         obj[langShortCode][`${view}/${currentBlock}/${textKey}`] = withoutSlot(text)
       }
     }
+    obj[`default`] = defaultLanguage;
   })
 
   return obj
