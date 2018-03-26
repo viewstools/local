@@ -4,8 +4,9 @@ const fs = require('fs')
 const path = require('path')
 const uniq = require('uniq')
 const getI18n = require('./get-i18n.js')
+const setI18n = require('./set-i18n.js')
 
-module.exports = function(root) {
+module.exports = function({ type, root }) {
   glob([path.join(root, '**', '*.view')], {
     bashNative: ['linux'],
   }).then(list => {
