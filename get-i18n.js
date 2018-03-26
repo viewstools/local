@@ -21,24 +21,27 @@ function getI18n({view, rtext, defaultLanguage = 'en'}) {
   lines.forEach((line, index) => {
     if (isBlock(line)) {
       currentBlock = line;
+      textKey = null;
     }
     if (isText(line)) {
       const text = getText(line)
       const isTranslation = regexList.some(regex => regex.test(lines[index-1]));
-      if(!isTranslation){
-        textKey = line;
-        base[`${view}/${currentBlock}/${textKey}`] = withoutSlot(text)
-      } else {
+
+      if(isTranslation && textKey){
         const langShortCode = lines[index-1].split('<')[1];
         if(!obj.hasOwnProperty(langShortCode)){
           obj[langShortCode] = {};
         }
         obj[langShortCode][`${view}/${currentBlock}/${textKey}`] = withoutSlot(text)
-      }
-    }
-    obj[defaultLanguage] = base;
-  })
+      } else if(!isTranslation){
+        textKey = line;
+        base[`${view}/${currentBlock}/${textKey}`] = withoutSlot(text)
+        return
+      } 
 
+    }
+  })
+  obj[defaultLanguage] = base;
   return obj
 }
 module.exports = getI18n
