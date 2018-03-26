@@ -2,14 +2,26 @@
 
 exports[`#getI18n 1`] = `
 Object {
-  "text <name gets a default value": "gets a default value",
-  "text Assignment:": "Assignment:",
+  "en": Object {
+    "Read/CaptureText/placeholder hi": "hi",
+    "Read/Name Text/text <name gets a default value": "gets a default value",
+    "Read/Text/text Assignment:": "Assignment:",
+  },
 }
 `;
 
 exports[`#getI18n 2`] = `
 Object {
-  "text Assignment:": "Assignment:",
-  "text Tarea:": "Tarea:",
+  "deCH": Object {
+    "Read/NameLabel Text/text Name:": "Namen:",
+  },
+  "en": Object {
+    "Read/NameLabel Text/text Name:": "Name:",
+    "Read/Text/text Assignment:": "Assignment:",
+  },
+  "es": Object {
+    "Read/NameLabel Text/text Name:": "Nombre:",
+    "Read/Text/text Assignment:": "Tarea:",
+  },
 }
 `;

@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#setI18n 1`] = `
+"Read Vertical
+Text
+color #323232
+fontFamily SlatePro
+fontSize 20
+fontWeight 600
+text Assignment:
+when <es
+text Tarea:
+when <enIE
+text Assignment:
+
+Name Text
+text <name gets a default value
+when <es
+text <name tiene un valor por defecto
+when <enIE
+text <name has a default value
+
+CaptureText
+placeholder hi
+when <es
+placeholder hola
+when <enIE
+placeholder hey"
+`;
+
+exports[`#setI18n 2`] = `
+"Read Vertical
+Text
+color #323232
+fontFamily SlatePro
+fontSize 20
+fontWeight 600
+text Assignment:
+when <es
+text Tarea:
+when <enIE
+text Thing to do:"
+`;
