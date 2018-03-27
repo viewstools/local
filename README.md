@@ -1,27 +1,31 @@
-# @viewstools/get-text
+# @viewstools/local
 
-Get your Views text into a JSON for ready for I18n
+Get your Views text into JSON files for ready for I18n and back
 
 Install it with:
 
 ```
-yarn add --dev @viewstools/get-text
+yarn add --dev @viewstools/local
 ```
 
 Set it up on your `package.json`, on the `scripts` section add:
 
 ```
-"views:get-text": "views-get-text > en.json"
+"views:local:get": "views-local get",
+"views:local:set": "views-local set"
 ```
 
 Run it like:
 
 ```
-yarn views:get-text
-```
+# Extract i18n text strings into JSON files in a translations folder
+# named after the language. The default is en.
+yarn views:local:get
 
-It will create a JSON file named `en.json` that contains the strings ready to be
-translated.
+# Put the translations back into your view files. It will read the JSON
+# files from your translations folder.
+yarn views:local:set
+```
 
 License BSD-3-Clause
 (c) 2018 UXtemple Ltd.
