@@ -32,10 +32,24 @@ when <deCH
 text Namen:
 `
 
+const READ_VIEW_WITH_NONTRANSLATION_CONDITIONAL_TEXT = `Read Vertical
+Text
+color #323232
+fontFamily SlatePro
+fontSize 20
+fontWeight 600
+text Off
+when <isCondition
+text On`
+
 test('#getI18n', () => {
   expect(getI18n({ view: 'Read', source: READ_VIEW })).toMatchSnapshot()
 
   expect(
     getI18n({ view: 'Read', source: READ_VIEW_THAT_ALREADY_HAS_TRANSLATIONS })
+  ).toMatchSnapshot()
+
+  expect(
+    getI18n({view: 'Read', rtext: READ_VIEW_WITH_NONTRANSLATION_CONDITIONAL_TEXT})
   ).toMatchSnapshot()
 })

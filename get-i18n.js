@@ -16,7 +16,7 @@ function getI18n({ defaultLanguage = 'en', source, view }) {
   let currentBlock = null
   let currentView = null
   const regexList = LOCAL_SCOPES.map(
-    shortcode => new RegExp(`^when <${shortcode}`)
+    shortcode => new RegExp(`^when <${shortcode}$`)
   )
   let textKey
 
