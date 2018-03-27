@@ -25,3 +25,12 @@ Object {
   },
 }
 `;
+
+exports[`#getI18n 3`] = `
+Object {
+  "en": Object {
+    "Read/Text/text Off": "Off",
+    "Read/Text/text On": "On",
+  },
+}
+`;
