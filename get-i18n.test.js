@@ -33,9 +33,9 @@ text Namen:
 `
 
 test('#getI18n', () => {
-  expect(getI18n({view: 'Read', rtext: READ_VIEW})).toMatchSnapshot()
+  expect(getI18n({ view: 'Read', source: READ_VIEW })).toMatchSnapshot()
 
   expect(
-    getI18n({view: 'Read', rtext: READ_VIEW_THAT_ALREADY_HAS_TRANSLATIONS})
+    getI18n({ view: 'Read', source: READ_VIEW_THAT_ALREADY_HAS_TRANSLATIONS })
   ).toMatchSnapshot()
 })
